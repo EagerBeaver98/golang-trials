@@ -13,5 +13,8 @@ func main() {
 		fmt.Fprintf(w, "Welcome to the server!")
 	})
 
+	fs := http.FileServer(http.Dir("static/"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	http.ListenAndServe(":"+port, nil)
 }
